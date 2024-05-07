@@ -1,9 +1,15 @@
 package com.caioamber.hotel.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name="carro")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of="id")
 public class Carro {
     @Id
     @GeneratedValue
@@ -17,4 +23,7 @@ public class Carro {
 
     @OneToOne(mappedBy = "carro")
     private Vaga vaga;
+
+    @OneToOne(mappedBy = "carro")
+    private Ticket ticket;
 }

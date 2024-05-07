@@ -4,22 +4,20 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name="vaga")
+@Table(name = "restaurante")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-public class Vaga {
+public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean status;
+
+    private String turno;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_carro", referencedColumnName = "id")
-    private Carro carro;
-
-    @OneToOne(mappedBy = "vaga")
-    private Ticket ticket;
+    @JoinColumn(name="id_cardapio", referencedColumnName = "id")
+    private Cardapio cardapio;
 }

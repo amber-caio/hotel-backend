@@ -1,25 +1,23 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.entities.enums.FormaPagamento;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name="vaga")
+@Table(name = "pagamento")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-public class Vaga {
+public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento formaPagamento;
+
     private boolean status;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_carro", referencedColumnName = "id")
-    private Carro carro;
-
-    @OneToOne(mappedBy = "vaga")
-    private Ticket ticket;
 }

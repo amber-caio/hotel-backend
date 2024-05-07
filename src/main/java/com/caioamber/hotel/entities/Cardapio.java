@@ -3,23 +3,24 @@ package com.caioamber.hotel.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.UUID;
-
 @Entity
-@Table(name="funcionario")
+@Table(name="cardapio")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-public class Funcionario {
+public class Cardapio {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
+
     private String nome;
-    private String cpf;
-    private LocalDate data_admissao;
+    private String entrada;
+    private String pratoPrincipal;
+    private String sobremesa;
     private boolean ativo;
+
+    @OneToOne(mappedBy = "cardapio")
+    private Restaurante restaurante;
 }
