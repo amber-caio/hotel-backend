@@ -1,5 +1,6 @@
 package com.caioamber.hotel.controllers;
 
+import com.caioamber.hotel.dtos.HospedeStatusDTO;
 import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
 import com.caioamber.hotel.dtos.hospedes.HospedeDetalhamentoDTO;
 import com.caioamber.hotel.services.HospedeService;
@@ -18,8 +19,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/hospedes")
 public class HospedeController {
+
     @Autowired
     private HospedeService service;
+
+    // Cadastro
 
     @PostMapping
     @Operation(summary = "Cadastrar Hóspede",
@@ -35,11 +39,35 @@ public class HospedeController {
         return ResponseEntity.created(uri).body(hospede);
     }
 
+    // Listar Hospedes
+
     @GetMapping
     @Operation(summary = "Listar Hóspedes",
             description ="Listar Hóspedes",
             tags = {"Hóspedes"})
     public ResponseEntity<List<HospedeDetalhamentoDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    }
+
+    // Get by CPF
+
+    @GetMapping("{cpf}")
+    @Operation(summary = "Buscar Hóspede por CPF",
+            description ="Método utilizado para buscar um hóspede pelo seu CPF",
+            tags = {"Hóspedes"})
+    public ResponseEntity<HospedeDetalhamentoDTO> getByCPF(@PathVariable String cpf){
+        return new ResponseEntity<>(service.getByCPF(cpf), HttpStatus.OK);
+    }
+
+    // Alterar Status de um Hospede
+
+    @PutMapping("/{cpf}")
+    @Transactional
+    @Operation(summary = "Alterar status de um Hospede!",
+            description ="Método criado para alterar o status de um Hospede, espera uma entrada booleana!",
+            tags = {"Hóspedes"})
+    public ResponseEntity<HospedeDetalhamentoDTO> alterarStatus (@PathVariable String cpf, @RequestBody HospedeStatusDTO status){
+        return new ResponseEntity<>(service.alterarStatus(cpf , status.ativo()), HttpStatus.OK);
+
     }
 }

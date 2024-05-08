@@ -7,12 +7,16 @@ public record HospedeDetalhamentoDTO(
         Long id,
         String nome,
         String cpf,
-        int idade) {
+        int idade,
+        boolean ativo
+) {
 
     public HospedeDetalhamentoDTO(Hospede hospede) {
         this(hospede.getId(),
                 hospede.getNome(),
                 hospede.getCpf(),
-                hospede.getIdade());
+                hospede.getIdade(),
+                hospede.isAtivo()
+        );
     }
 }

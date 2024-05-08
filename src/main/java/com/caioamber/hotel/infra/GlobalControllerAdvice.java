@@ -1,6 +1,7 @@
 package com.caioamber.hotel.infra;
 
 import com.caioamber.hotel.dtos.ExceptionDTO;
+import com.caioamber.hotel.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,5 +33,17 @@ public class GlobalControllerAdvice {
     @ResponseBody
     public ResponseEntity<?> handleMethodNotValidException(MethodArgumentNotValidException e){
         return ResponseEntity.badRequest().body(Map.of("message", e.getFieldErrors().stream().map(ExceptionDTO:: new).collect(Collectors.toList())));
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<?> handleNotFoundException (Exception e){
+
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 }
