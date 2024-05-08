@@ -11,20 +11,18 @@ import java.util.List;
 
 @Service
 public class HospedeService {
+
     @Autowired
     private HospedeRepository repository;
 
     public HospedeDetalhamentoDTO cadastro(HospedeCreateDTO data) {
-        Hospede hospede = new Hospede(data);
-
-        repository.save(hospede);
-
-        return new HospedeDetalhamentoDTO(hospede);
+        if (this.repository.findByCpf(data.cpf()) != null){
+            throw new IllegalArgumentException("This CFP is already being used");
+        }
+        return new HospedeDetalhamentoDTO(repository.save(new Hospede(data)));
     }
 
     public List<HospedeDetalhamentoDTO> getAll(){
         return repository.findAll().stream().map(HospedeDetalhamentoDTO::new).toList();
     }
-
-
 }

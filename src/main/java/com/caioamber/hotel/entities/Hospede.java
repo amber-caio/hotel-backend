@@ -20,6 +20,7 @@ public class Hospede {
     private String nome;
     private String cpf;
     private int idade;
+    private boolean ativo;
 
     @OneToOne(mappedBy = "hospede")
     private Carro carro;
