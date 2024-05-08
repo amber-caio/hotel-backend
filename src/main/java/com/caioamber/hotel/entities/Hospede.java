@@ -1,10 +1,8 @@
 package com.caioamber.hotel.entities;
 
-import com.caioamber.hotel.dtos.HospedeCreateDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.UUID;
 
 @Entity
 @Table(name="hospede")
@@ -14,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class Hospede {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,5 +31,6 @@ public class Hospede {
         this.nome = data.nome();
         this.cpf = data.cpf();
         this.idade = data.idade();
+        this.ativo = true;
     }
 }

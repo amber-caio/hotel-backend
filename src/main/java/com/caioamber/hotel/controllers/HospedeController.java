@@ -1,7 +1,7 @@
 package com.caioamber.hotel.controllers;
 
-import com.caioamber.hotel.dtos.HospedeCreateDTO;
-import com.caioamber.hotel.dtos.HospedeDetalhamentoDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDetalhamentoDTO;
 import com.caioamber.hotel.services.HospedeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
@@ -26,9 +26,10 @@ public class HospedeController {
             description ="Cadastrar Hóspede",
             tags = {"Hóspedes"})
     @Transactional
-    public ResponseEntity<HospedeDetalhamentoDTO> cadastrar(@RequestBody @Valid HospedeCreateDTO data,
+    public ResponseEntity<HospedeDetalhamentoDTO> cadastrar (@RequestBody @Valid HospedeCreateDTO data,
                                                                         UriComponentsBuilder uriBuilder) {
         HospedeDetalhamentoDTO hospede = service.cadastro(data);
+
         URI uri = uriBuilder.path(("/hospedes/{id}")).buildAndExpand(hospede.id()).toUri();
 
         return ResponseEntity.created(uri).body(hospede);
