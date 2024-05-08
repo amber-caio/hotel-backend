@@ -1,8 +1,8 @@
 package com.caioamber.hotel.controllers;
 
-import com.caioamber.hotel.dtos.HospedeStatusDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeStatusDTO;
 import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
-import com.caioamber.hotel.dtos.hospedes.HospedeDetalhamentoDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import com.caioamber.hotel.services.HospedeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
@@ -30,22 +30,20 @@ public class HospedeController {
             description ="Cadastrar Hóspede",
             tags = {"Hóspedes"})
     @Transactional
-    public ResponseEntity<HospedeDetalhamentoDTO> cadastrar (@RequestBody @Valid HospedeCreateDTO data,
-                                                                        UriComponentsBuilder uriBuilder) {
-        HospedeDetalhamentoDTO hospede = service.cadastro(data);
-
+    public ResponseEntity<HospedeDTO> cadastrar (@RequestBody @Valid HospedeCreateDTO data,
+                                                 UriComponentsBuilder uriBuilder) {
+        HospedeDTO hospede = service.cadastro(data);
         URI uri = uriBuilder.path(("/hospedes/{id}")).buildAndExpand(hospede.id()).toUri();
-
         return ResponseEntity.created(uri).body(hospede);
     }
 
     // Listar Hospedes
 
     @GetMapping
-    @Operation(summary = "Listar Hóspedes",
+    @Operation(summary = "Listar Hóspedes Ativos",
             description ="Listar Hóspedes",
             tags = {"Hóspedes"})
-    public ResponseEntity<List<HospedeDetalhamentoDTO>> getAll(){
+    public ResponseEntity<List<HospedeDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
@@ -55,7 +53,7 @@ public class HospedeController {
     @Operation(summary = "Buscar Hóspede por CPF",
             description ="Método utilizado para buscar um hóspede pelo seu CPF",
             tags = {"Hóspedes"})
-    public ResponseEntity<HospedeDetalhamentoDTO> getByCPF(@PathVariable String cpf){
+    public ResponseEntity<HospedeDTO> getByCPF(@PathVariable String cpf){
         return new ResponseEntity<>(service.getByCPF(cpf), HttpStatus.OK);
     }
 
@@ -66,8 +64,7 @@ public class HospedeController {
     @Operation(summary = "Alterar status de um Hospede!",
             description ="Método criado para alterar o status de um Hospede, espera uma entrada booleana!",
             tags = {"Hóspedes"})
-    public ResponseEntity<HospedeDetalhamentoDTO> alterarStatus (@PathVariable String cpf, @RequestBody HospedeStatusDTO status){
+    public ResponseEntity<HospedeDTO> alterarStatus (@PathVariable String cpf, @RequestBody HospedeStatusDTO status){
         return new ResponseEntity<>(service.alterarStatus(cpf , status.ativo()), HttpStatus.OK);
-
     }
 }

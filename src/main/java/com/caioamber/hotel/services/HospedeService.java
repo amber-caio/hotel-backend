@@ -1,7 +1,7 @@
 package com.caioamber.hotel.services;
 
 import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
-import com.caioamber.hotel.dtos.hospedes.HospedeDetalhamentoDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import com.caioamber.hotel.repositories.HospedeRepository;
@@ -28,7 +28,7 @@ public class HospedeService {
 
      */
 
-    public HospedeDetalhamentoDTO cadastro(HospedeCreateDTO data) {
+    public HospedeDTO cadastro(HospedeCreateDTO data) {
         if (this.repository.findByCpf(data.cpf()) != null){
 
             Hospede hospede = this.repository.findByCpf(data.cpf());
@@ -36,26 +36,23 @@ public class HospedeService {
             if (hospede.isAtivo()){
                 throw new IllegalArgumentException("This CFP is already being used");
             }
-
             hospede.setAtivo(true);
-
-            return new HospedeDetalhamentoDTO(hospede);
+            return new HospedeDTO(hospede);
         }
-        return new HospedeDetalhamentoDTO(repository.save(new Hospede(data)));
+        return new HospedeDTO(repository.save(new Hospede(data)));
     }
-
 
     // Get All 'Hospedes' ativos
 
-    public List<HospedeDetalhamentoDTO> getAll(){
-        return repository.findAllByAtivoTrue().stream().map(HospedeDetalhamentoDTO::new).toList();
+    public List<HospedeDTO> getAll(){
+        return repository.findAllByAtivoTrue().stream().map(HospedeDTO::new).toList();
     }
 
     // Get By CPF
 
-    public HospedeDetalhamentoDTO getByCPF(String cpf){
+    public HospedeDTO getByCPF(String cpf){
         if(repository.findByCpf(cpf) != null){
-            return new HospedeDetalhamentoDTO(repository.findByCpf(cpf));
+            return new HospedeDTO(repository.findByCpf(cpf));
         }
         throw new NotFoundException("Visitant not found!");
     }
@@ -69,13 +66,13 @@ public class HospedeService {
 
      */
 
-    public HospedeDetalhamentoDTO alterarStatus(String cpf, Boolean ativo){
+    public HospedeDTO alterarStatus(String cpf, Boolean ativo){
 
         if(this.repository.findByCpf(cpf) != null){
 
             Hospede hospede = this.repository.findByCpf(cpf);
             hospede.setAtivo(ativo);
-            return new HospedeDetalhamentoDTO(hospede);
+            return new HospedeDTO(hospede);
 
         }
         throw new NotFoundException("Visitant not found!");

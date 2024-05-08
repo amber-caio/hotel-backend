@@ -2,7 +2,7 @@ package com.caioamber.hotel.dtos.hospedes;
 
 import com.caioamber.hotel.entities.Hospede;
 
-public record HospedeDetalhamentoDTO(
+public record HospedeDTO(
 
         Long id,
         String nome,
@@ -11,7 +11,7 @@ public record HospedeDetalhamentoDTO(
         boolean ativo
 ) {
 
-    public HospedeDetalhamentoDTO(Hospede hospede) {
+    public HospedeDTO(Hospede hospede) {
         this(hospede.getId(),
                 hospede.getNome(),
                 hospede.getCpf(),

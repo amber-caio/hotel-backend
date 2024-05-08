@@ -11,11 +11,13 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class Carro {
+
     @Id
     @GeneratedValue
     private Long id;
     private String placa;
     private String modelo;
+    private boolean ativo;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_hospede", referencedColumnName = "id")
