@@ -1,5 +1,6 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.dtos.carros.CarroCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,4 +29,11 @@ public class Carro {
 
     @OneToOne(mappedBy = "carro")
     private Ticket ticket;
+
+    public Carro(CarroCreateDTO data) {
+        this.placa = data.placa();
+        this.modelo = data.modelo();
+        this.ativo = true;
+        this.hospede = data.cpfHospede();
+    }
 }
