@@ -1,7 +1,6 @@
 package com.caioamber.hotel.entities;
 
 import com.caioamber.hotel.dtos.carros.CarroCreateDTO;
-import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

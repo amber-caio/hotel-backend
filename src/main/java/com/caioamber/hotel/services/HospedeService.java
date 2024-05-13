@@ -15,6 +15,8 @@ public class HospedeService {
 
     @Autowired
     private HospedeRepository repository;
+    @Autowired
+
 
     /*
 
@@ -42,7 +44,7 @@ public class HospedeService {
         return new HospedeDTO(repository.save(new Hospede(data)));
     }
 
-    // Get All 'Hospedes' ativos
+    // Get All 'Hospedes' Ativos
 
     public List<HospedeDTO> getAll(){
         return repository.findAllByAtivoTrue().stream().map(HospedeDTO::new).toList();
@@ -67,13 +69,15 @@ public class HospedeService {
      */
 
     public HospedeDTO alterarStatus(String cpf, Boolean ativo){
-
         if(this.repository.findByCpf(cpf) != null){
-
             Hospede hospede = this.repository.findByCpf(cpf);
             hospede.setAtivo(ativo);
-            return new HospedeDTO(hospede);
 
+            if(!hospede.isAtivo()){
+
+            }
+
+            return new HospedeDTO(hospede);
         }
         throw new NotFoundException("Visitant not found!");
     }

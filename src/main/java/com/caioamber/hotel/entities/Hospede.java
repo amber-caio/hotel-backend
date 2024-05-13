@@ -28,11 +28,4 @@ public class Hospede {
         this.idade = data.idade();
         this.ativo = true;
     }
-
-    public Hospede(HospedeDTO data) {
-        this.nome = data.nome();
-        this.cpf = data.cpf();
-        this.idade = data.idade();
-        this.ativo = true;
-    }
 }

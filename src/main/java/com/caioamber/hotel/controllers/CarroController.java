@@ -8,20 +8,22 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/carros")
 public class CarroController {
+
     @Autowired
     private CarroService service;
+
+    // Create Carro
 
     @PostMapping
     @Operation(summary = "Cadastrar Carro",
@@ -32,5 +34,15 @@ public class CarroController {
         CarroDTO carro = service.cadastro(data);
         URI uri = uriBuilder.path(("/carros/{id}")).buildAndExpand(carro.id()).toUri();
         return ResponseEntity.created(uri).body(carro);
+    }
+
+    // Get Carros
+
+    @GetMapping
+    @Operation(summary = "Listar Carros Ativos",
+            description ="Listar Carros",
+            tags = {"Carros"})
+    public ResponseEntity<List<CarroDTO>> getAll(){
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 }
