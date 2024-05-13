@@ -1,6 +1,7 @@
 package com.caioamber.hotel.entities;
 
 import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,13 +22,14 @@ public class Hospede {
     private int idade;
     private boolean ativo;
 
-    @OneToOne(mappedBy = "hospede")
-    private Carro carro;
-
-    @OneToOne(mappedBy = "hospede")
-    private Reserva reserva;
-
     public Hospede(HospedeCreateDTO data) {
+        this.nome = data.nome();
+        this.cpf = data.cpf();
+        this.idade = data.idade();
+        this.ativo = true;
+    }
+
+    public Hospede(HospedeDTO data) {
         this.nome = data.nome();
         this.cpf = data.cpf();
         this.idade = data.idade();

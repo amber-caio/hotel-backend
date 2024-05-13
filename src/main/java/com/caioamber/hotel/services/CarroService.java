@@ -12,12 +12,16 @@ public class CarroService {
 
     @Autowired
     private CarroRepository repository;
+    @Autowired
+    private HospedeService hospedeService;
 
-    public CarroDTO cadastro (CarroCreateDTO data){
+    public CarroDTO cadastro (CarroCreateDTO data) {
         Carro carro = new Carro(data);
+
+//        carro.setFk_hospede(hospedeService.getByCPF(data.cpfHospede()));
+
         repository.save(carro);
 
         return new CarroDTO(carro);
     }
-
 }

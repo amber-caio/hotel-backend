@@ -33,7 +33,7 @@ public class HospedeController {
     public ResponseEntity<HospedeDTO> cadastrar (@RequestBody @Valid HospedeCreateDTO data,
                                                  UriComponentsBuilder uriBuilder) {
         HospedeDTO hospede = service.cadastro(data);
-        URI uri = uriBuilder.path(("/hospedes/{id}")).buildAndExpand(hospede.id()).toUri();
+        URI uri = uriBuilder.path(("/hospedes/{id}")).buildAndExpand(hospede.cpf()).toUri();
         return ResponseEntity.created(uri).body(hospede);
     }
 

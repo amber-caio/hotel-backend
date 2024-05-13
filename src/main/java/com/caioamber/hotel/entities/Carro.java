@@ -1,6 +1,7 @@
 package com.caioamber.hotel.entities;
 
 import com.caioamber.hotel.dtos.carros.CarroCreateDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,26 +15,21 @@ import lombok.*;
 public class Carro {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String placa;
     private String modelo;
     private boolean ativo;
 
+    // FK de hospede na classe carro
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_hospede", referencedColumnName = "id")
-    private Hospede hospede;
-
-    @OneToOne(mappedBy = "carro")
-    private Vaga vaga;
-
-    @OneToOne(mappedBy = "carro")
-    private Ticket ticket;
+    @JoinColumn(name="fk_hospede", referencedColumnName = "id")
+    private Hospede fk_hospede;
 
     public Carro(CarroCreateDTO data) {
         this.placa = data.placa();
         this.modelo = data.modelo();
         this.ativo = true;
-        this.hospede = data.cpfHospede();
     }
 }

@@ -9,7 +9,6 @@ public record HospedeCreateDTO(
         String nome,
         @NotBlank
         String cpf,
-
         @Positive
         @NotNull
         int idade

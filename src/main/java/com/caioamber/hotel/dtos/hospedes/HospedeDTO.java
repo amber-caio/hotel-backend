@@ -3,7 +3,6 @@ package com.caioamber.hotel.dtos.hospedes;
 import com.caioamber.hotel.entities.Hospede;
 
 public record HospedeDTO(
-
         Long id,
         String nome,
         String cpf,
