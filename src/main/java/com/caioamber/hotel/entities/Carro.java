@@ -26,6 +26,9 @@ public class Carro {
     @JoinColumn(name="fk_hospede", referencedColumnName = "id")
     private Hospede fk_hospede;
 
+    @OneToOne(mappedBy = "fk_carro")
+    private Vaga vaga;
+
     public Carro(CarroCreateDTO data) {
         this.placa = data.placa();
         this.modelo = data.modelo();

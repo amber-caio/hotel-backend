@@ -22,6 +22,9 @@ public class Hospede {
     private int idade;
     private boolean ativo;
 
+    @OneToOne(mappedBy = "fk_hospede")
+    private Carro carro;
+
     public Hospede(HospedeCreateDTO data) {
         this.nome = data.nome();
         this.cpf = data.cpf();

@@ -2,6 +2,7 @@ package com.caioamber.hotel.services;
 
 import com.caioamber.hotel.dtos.carros.CarroCreateDTO;
 import com.caioamber.hotel.dtos.carros.CarroDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import com.caioamber.hotel.entities.Carro;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import com.caioamber.hotel.repositories.CarroRepository;
@@ -44,5 +45,23 @@ public class CarroService {
         return repository.findAllByAtivoTrue().stream().map(CarroDTO::new).toList();
     }
 
-    
+    // Get vehicle by placa
+    public CarroDTO getByPlaca(String placa){
+        if(repository.findByPlaca(placa) != null){
+            return new CarroDTO(repository.findByPlaca(placa));
+        }
+        throw new NotFoundException("Vehicle not found!");
+    }
+
+    // Change vehicle status
+    public CarroDTO alterarStatus(String placa, boolean ativo){
+        if(this.repository.findByPlaca(placa) != null) {
+            Carro carro = this.repository.findByPlaca(placa);
+            carro.setAtivo(ativo);
+
+            return new CarroDTO(carro);
+        }
+        throw new NotFoundException("Vehicle not found!");
+    }
+
 }

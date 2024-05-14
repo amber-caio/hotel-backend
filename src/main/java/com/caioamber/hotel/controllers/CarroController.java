@@ -1,8 +1,8 @@
 package com.caioamber.hotel.controllers;
 
+import com.caioamber.hotel.dtos.carros.CarroStatusDTO;
 import com.caioamber.hotel.dtos.carros.CarroCreateDTO;
 import com.caioamber.hotel.dtos.carros.CarroDTO;
-import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import com.caioamber.hotel.services.CarroService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
@@ -44,5 +44,20 @@ public class CarroController {
             tags = {"Carros"})
     public ResponseEntity<List<CarroDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("{placa}")
+    @Operation(summary = "Buscar carro por placa",
+            description ="Buscar carro por placa",
+            tags = {"Carros"})
+    public ResponseEntity<CarroDTO> getByPlaca(@PathVariable String placa){
+        return new ResponseEntity<>(service.getByPlaca(placa), HttpStatus.OK);
+    }
+    @PutMapping("{placa}")
+    @Operation(summary = "Alterar status de um carro",
+            description ="Alterar status de um carro",
+            tags = {"Carros"})
+    public ResponseEntity<CarroDTO> alterarStatus(@PathVariable String placa, @RequestBody CarroStatusDTO carroStatusDTO) {
+        return new ResponseEntity<>(service.alterarStatus(placa, carroStatusDTO.ativo()), HttpStatus.OK);
     }
 }

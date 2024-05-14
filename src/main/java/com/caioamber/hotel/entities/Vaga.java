@@ -1,5 +1,6 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.dtos.vagas.VagaCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,9 +18,10 @@ public class Vaga {
     private boolean status;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_carro", referencedColumnName = "id")
-    private Carro carro;
+    @JoinColumn(name="fk_carro", referencedColumnName = "id")
+    private Carro fk_carro;
 
-    @OneToOne(mappedBy = "vaga")
-    private Ticket ticket;
+//    @OneToOne(mappedBy = "vaga")
+//    private Ticket ticket;
+
 }

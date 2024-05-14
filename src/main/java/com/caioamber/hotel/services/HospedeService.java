@@ -2,8 +2,10 @@ package com.caioamber.hotel.services;
 
 import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
 import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
+import com.caioamber.hotel.entities.Carro;
 import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.exceptions.NotFoundException;
+import com.caioamber.hotel.repositories.CarroRepository;
 import com.caioamber.hotel.repositories.HospedeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class HospedeService {
     @Autowired
     private HospedeRepository repository;
     @Autowired
-
+    private CarroRepository carroRepository;
 
     /*
 
@@ -74,11 +76,13 @@ public class HospedeService {
             hospede.setAtivo(ativo);
 
             if(!hospede.isAtivo()){
-
+                Carro carro = hospede.getCarro();
+                carro.setAtivo(false);
             }
 
             return new HospedeDTO(hospede);
         }
         throw new NotFoundException("Visitant not found!");
     }
+
 }

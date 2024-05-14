@@ -7,11 +7,10 @@ public record CarroDTO(
 
         Long id,
         String placa,
-        String modelo,
-        Hospede hospede
+        String modelo
 
 ) {
     public CarroDTO(Carro carro) {
-        this(carro.getId(), carro.getPlaca(), carro.getModelo(), carro.getFk_hospede());
+        this(carro.getId(), carro.getPlaca(), carro.getModelo());
     }
 }
