@@ -2,6 +2,7 @@ package com.caioamber.hotel.services;
 
 import com.caioamber.hotel.dtos.vagas.VagaCreateDTO;
 import com.caioamber.hotel.dtos.vagas.VagaDTO;
+import com.caioamber.hotel.dtos.vagas.VagaStatusDTO;
 import com.caioamber.hotel.entities.Vaga;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import com.caioamber.hotel.repositories.CarroRepository;
@@ -20,7 +21,7 @@ public class VagaService {
     private CarroRepository carroRepository;
 
     public VagaDTO cadastro(VagaCreateDTO data) {
-        if(carroRepository.findByPlaca(data.placaCarro()) == null) {
+        if(carroRepository.findByPlaca(data.placaCarro()) == null && data.placaCarro() != "") {
             throw new NotFoundException("Vehicle not found!");
         }
 
@@ -33,5 +34,23 @@ public class VagaService {
 
     public List<VagaDTO> getAll(){
         return repository.findAllByStatusFalse().stream().map(VagaDTO::new).toList();
+    }
+
+    public int getVagasDisponiveis(){
+        return repository.findAllByStatusFalse().size();
+    }
+
+    public int getVagasIndisponiveis(){
+        return repository.findAllByStatusTrue().size();
+    }
+
+    public VagaDTO getById(Long id){
+        return new VagaDTO(repository.findById(id).orElseThrow(() -> new NotFoundException("Car space not found!")));
+    }
+
+    public VagaDTO alterarStatus(Long id, Boolean ativo){
+        Vaga vaga = repository.findById(id).orElseThrow(() -> new NotFoundException("Car space not found!"));
+        vaga.setStatus(ativo);
+        return new VagaDTO(vaga);
     }
 }

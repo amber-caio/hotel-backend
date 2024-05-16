@@ -26,7 +26,7 @@ CREATE TABLE vaga(
     id bigint not null auto_increment,
     status TINYINT not null,
 
-    fk_carro bigint not null,
+    fk_carro bigint,
 
     FOREIGN KEY (fk_carro) REFERENCES carro(id),
     PRIMARY KEY(id)

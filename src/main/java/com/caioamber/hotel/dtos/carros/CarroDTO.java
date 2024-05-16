@@ -7,10 +7,11 @@ public record CarroDTO(
 
         Long id,
         String placa,
-        String modelo
+        String modelo,
+        Boolean ativo
 
 ) {
     public CarroDTO(Carro carro) {
-        this(carro.getId(), carro.getPlaca(), carro.getModelo());
+        this(carro.getId(), carro.getPlaca(), carro.getModelo(), carro.isAtivo());
     }
 }

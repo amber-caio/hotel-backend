@@ -57,7 +57,7 @@ public class CarroController {
     @Operation(summary = "Alterar status de um carro",
             description ="Alterar status de um carro",
             tags = {"Carros"})
-    public ResponseEntity<CarroDTO> alterarStatus(@PathVariable String placa, @RequestBody CarroStatusDTO carroStatusDTO) {
+    public ResponseEntity<CarroDTO> alterarStatus(@PathVariable String placa, @RequestBody @Valid CarroStatusDTO carroStatusDTO) {
         return new ResponseEntity<>(service.alterarStatus(placa, carroStatusDTO.ativo()), HttpStatus.OK);
     }
 }

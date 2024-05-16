@@ -54,11 +54,10 @@ public class CarroService {
     }
 
     // Change vehicle status
-    public CarroDTO alterarStatus(String placa, boolean ativo){
+    public CarroDTO alterarStatus(String placa, Boolean ativo){
         if(this.repository.findByPlaca(placa) != null) {
             Carro carro = this.repository.findByPlaca(placa);
             carro.setAtivo(ativo);
-
             return new CarroDTO(carro);
         }
         throw new NotFoundException("Vehicle not found!");
