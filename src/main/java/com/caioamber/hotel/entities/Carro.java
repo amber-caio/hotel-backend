@@ -18,7 +18,7 @@ public class Carro {
     private Long id;
     private String placa;
     private String modelo;
-    private boolean ativo;
+    private Boolean ativo;
 
     // FK de hospede na classe carro
 

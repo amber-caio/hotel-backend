@@ -1,6 +1,7 @@
 package com.caioamber.hotel.entities;
 
 import com.caioamber.hotel.dtos.vagas.VagaCreateDTO;
+import com.caioamber.hotel.dtos.vagas.VagaDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +16,7 @@ public class Vaga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean status;
+    private Boolean status = false;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_carro", referencedColumnName = "id")

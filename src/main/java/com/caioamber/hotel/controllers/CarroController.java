@@ -53,7 +53,7 @@ public class CarroController {
     public ResponseEntity<CarroDTO> getByPlaca(@PathVariable String placa){
         return new ResponseEntity<>(service.getByPlaca(placa), HttpStatus.OK);
     }
-    @PutMapping("{placa}")
+    @PutMapping("/{placa}")
     @Operation(summary = "Alterar status de um carro",
             description ="Alterar status de um carro",
             tags = {"Carros"})

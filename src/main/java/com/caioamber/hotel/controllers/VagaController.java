@@ -1,8 +1,10 @@
 package com.caioamber.hotel.controllers;
 
+import com.caioamber.hotel.dtos.vagas.VagaCarroDTO;
 import com.caioamber.hotel.dtos.vagas.VagaCreateDTO;
 import com.caioamber.hotel.dtos.vagas.VagaDTO;
 import com.caioamber.hotel.dtos.vagas.VagaStatusDTO;
+import com.caioamber.hotel.entities.Vaga;
 import com.caioamber.hotel.services.VagaService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
@@ -72,5 +74,14 @@ public class VagaController {
     @Transactional
     public ResponseEntity<VagaDTO> alterarStatus(@PathVariable Long id, @RequestBody @Valid VagaStatusDTO vagaStatusDTO) {
         return new ResponseEntity<>(service.alterarStatus(id, vagaStatusDTO.status()), HttpStatus.OK);
+    }
+
+    @PutMapping
+    @Operation(summary = "Cadastrar carro em uma vaga",
+            description = "Cadastrar carro em uma vaga",
+            tags = {"Vagas"})
+    @Transactional
+    public ResponseEntity<VagaDTO> cadastrarCarro(@RequestBody @Valid VagaCarroDTO data){
+        return new ResponseEntity<>(service.cadastrarCarro(data), HttpStatus.OK);
     }
 }

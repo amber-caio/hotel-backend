@@ -12,6 +12,6 @@ public record CarroDTO(
 
 ) {
     public CarroDTO(Carro carro) {
-        this(carro.getId(), carro.getPlaca(), carro.getModelo(), carro.isAtivo());
+        this(carro.getId(), carro.getPlaca(), carro.getModelo(), carro.getAtivo());
     }
 }

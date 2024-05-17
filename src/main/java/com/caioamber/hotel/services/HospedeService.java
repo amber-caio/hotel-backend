@@ -37,7 +37,7 @@ public class HospedeService {
 
             Hospede hospede = this.repository.findByCpf(data.cpf());
 
-            if (hospede.isAtivo()){
+            if (hospede.getAtivo()){
                 throw new IllegalArgumentException("This CFP is already being used");
             }
             hospede.setAtivo(true);
@@ -74,12 +74,12 @@ public class HospedeService {
         if(this.repository.findByCpf(cpf) != null){
             Hospede hospede = this.repository.findByCpf(cpf);
             hospede.setAtivo(ativo);
+            this.repository.save(hospede);
 
-            if(!hospede.isAtivo()){
+            if(!hospede.getAtivo() && hospede.getCarro() != null) {
                 Carro carro = hospede.getCarro();
                 carro.setAtivo(false);
             }
-
             return new HospedeDTO(hospede);
         }
         throw new NotFoundException("Visitant not found!");

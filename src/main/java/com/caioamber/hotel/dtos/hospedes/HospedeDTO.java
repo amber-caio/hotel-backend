@@ -7,7 +7,7 @@ public record HospedeDTO(
         String nome,
         String cpf,
         int idade,
-        boolean ativo
+        Boolean ativo
 ) {
 
     public HospedeDTO(Hospede hospede) {
@@ -15,7 +15,7 @@ public record HospedeDTO(
                 hospede.getNome(),
                 hospede.getCpf(),
                 hospede.getIdade(),
-                hospede.isAtivo()
+                hospede.getAtivo()
         );
     }
 }

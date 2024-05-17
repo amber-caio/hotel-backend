@@ -64,7 +64,7 @@ public class HospedeController {
     @Operation(summary = "Alterar status de um Hospede!",
             description ="Método criado para alterar o status de um Hospede, espera uma entrada booleana!",
             tags = {"Hóspedes"})
-    public ResponseEntity<HospedeDTO> alterarStatus (@PathVariable String cpf, @RequestBody HospedeStatusDTO status){
+    public ResponseEntity<HospedeDTO> alterarStatus (@PathVariable String cpf, @RequestBody @Valid HospedeStatusDTO status){
         return new ResponseEntity<>(service.alterarStatus(cpf , status.ativo()), HttpStatus.OK);
     }
 }

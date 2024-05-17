@@ -1,8 +1,11 @@
 package com.caioamber.hotel.services;
 
+import com.caioamber.hotel.dtos.vagas.VagaCarroDTO;
 import com.caioamber.hotel.dtos.vagas.VagaCreateDTO;
 import com.caioamber.hotel.dtos.vagas.VagaDTO;
 import com.caioamber.hotel.dtos.vagas.VagaStatusDTO;
+import com.caioamber.hotel.entities.Carro;
+import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.entities.Vaga;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import com.caioamber.hotel.repositories.CarroRepository;
@@ -26,7 +29,14 @@ public class VagaService {
         }
 
         Vaga vaga = new Vaga();
-        vaga.setFk_carro(carroRepository.findByPlaca(data.placaCarro()));
+
+        if(data.placaCarro() != ""){
+            Carro carro = carroRepository.findByPlaca(data.placaCarro());
+            vaga.setFk_carro(carro);
+        } else{
+            vaga.setFk_carro(null);
+        }
+
         repository.save(vaga);
 
         return new VagaDTO(vaga);
@@ -51,6 +61,17 @@ public class VagaService {
     public VagaDTO alterarStatus(Long id, Boolean ativo){
         Vaga vaga = repository.findById(id).orElseThrow(() -> new NotFoundException("Car space not found!"));
         vaga.setStatus(ativo);
+        this.repository.save(vaga);
         return new VagaDTO(vaga);
+    }
+
+    public VagaDTO cadastrarCarro(VagaCarroDTO data) {
+        Vaga vaga = new Vaga();
+        if(carroRepository.findByPlaca(data.placa()) != null && vaga.getStatus() == false){
+            vaga.setFk_carro(carroRepository.findByPlaca(data.placa()));
+            this.repository.save(vaga);
+            return new VagaDTO(vaga);
+        }
+        throw new NotFoundException("Vehicle not found or Occupied car space ");
     }
 }
