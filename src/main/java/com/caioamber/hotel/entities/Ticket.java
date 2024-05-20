@@ -19,7 +19,7 @@ public class Ticket {
     private Long id;
     private LocalDateTime data_hora;
     private double total;
-    private boolean status;
+    private Boolean status;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_hospede", referencedColumnName = "id")

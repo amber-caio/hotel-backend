@@ -1,4 +1,6 @@
 package com.caioamber.hotel.dtos.tickets;
 
-public record TicketCreateDTO() {
+import java.time.LocalDateTime;
+
+public record TicketCreateDTO(LocalDateTime data_hora, double total, Boolean status) {
 }
