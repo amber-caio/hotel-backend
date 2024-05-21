@@ -6,8 +6,11 @@ import java.time.LocalDateTime;
 
 public record TicketDTO(Long id, LocalDateTime data_hora, double total, Boolean status) {
     public TicketDTO(Ticket ticket){
-        this(ticket.getId(), ticket.getData_hora()
-                , ticket.getTotal(), ticket.getStatus());
+        this(
+            ticket.getId(),
+            ticket.getData_hora(),
+            ticket.getTotal(),
+            ticket.getStatus());
     }
 
 }

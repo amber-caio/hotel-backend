@@ -32,4 +32,13 @@ CREATE TABLE vaga(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE Ticket(
+    id bigint not null auto_increment,
+    data_hora VARCHAR(255) not null,
+    total DOUBLE not null,
+    status TINYINT not null,
+
+    PRIMARY KEY(id)
+)
+
 

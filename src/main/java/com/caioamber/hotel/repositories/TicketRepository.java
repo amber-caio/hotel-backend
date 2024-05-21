@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    List<TicketDTO> findAllByStatusTrue();
+    List<Ticket> findAllByStatusTrue();
 }
