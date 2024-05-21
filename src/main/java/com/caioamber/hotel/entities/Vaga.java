@@ -22,7 +22,7 @@ public class Vaga {
     @JoinColumn(name="fk_carro", referencedColumnName = "id")
     private Carro fk_carro;
 
-//    @OneToOne(mappedBy = "vaga")
-//    private Ticket ticket;
+    @OneToOne(mappedBy = "fk_vaga")
+    private Ticket ticket;
 
 }

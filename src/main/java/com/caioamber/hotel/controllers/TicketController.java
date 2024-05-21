@@ -2,6 +2,8 @@ package com.caioamber.hotel.controllers;
 
 import com.caioamber.hotel.dtos.tickets.TicketCreateDTO;
 import com.caioamber.hotel.dtos.tickets.TicketDTO;
+import com.caioamber.hotel.dtos.tickets.TicketStatusDTO;
+import com.caioamber.hotel.entities.Ticket;
 import com.caioamber.hotel.services.TicketService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
@@ -38,5 +40,21 @@ public class TicketController {
             tags = {"Tickets"})
     public ResponseEntity<List<TicketDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    @Operation(summary = "Buscar Ticket",
+            description = "Buscar Ticket",
+            tags = {"Tickets"})
+    public ResponseEntity<TicketDTO> getById(@PathVariable Long id){
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    @Operation(summary = "Alterar Status do Ticket",
+            description = "Alterar Status do Ticket",
+            tags = {"Tickets"})
+    public ResponseEntity<TicketDTO> alterarStatus(@PathVariable Long id, @RequestBody TicketStatusDTO ticketStatusDTO){
+        return new ResponseEntity<>(service.alterarStatus(id, ticketStatusDTO.status()), HttpStatus.OK);
     }
 }

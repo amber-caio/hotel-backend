@@ -32,11 +32,19 @@ CREATE TABLE vaga(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE Ticket(
+CREATE TABLE ticket(
     id bigint not null auto_increment,
     data_hora VARCHAR(255) not null,
     total DOUBLE not null,
     status TINYINT not null,
+
+    fk_hospede bigint,
+    fk_carro bigint,
+    fk_vaga bigint,
+
+    FOREIGN KEY (fk_hospede) REFERENCES hospede(id),
+    FOREIGN KEY (fk_carro) REFERENCES carro(id),
+    FOREIGN KEY (fk_vaga) REFERENCES vaga(id),
 
     PRIMARY KEY(id)
 )

@@ -2,6 +2,7 @@ package com.caioamber.hotel.entities;
 
 import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
 import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
+import com.caioamber.hotel.dtos.tickets.TicketDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,9 @@ public class Hospede {
 
     @OneToOne(mappedBy = "fk_hospede")
     private Carro carro;
+
+    @OneToOne(mappedBy = "fk_hospede")
+    private Ticket ticket;
 
     public Hospede(HospedeCreateDTO data) {
         this.nome = data.nome();

@@ -29,6 +29,9 @@ public class Carro {
     @OneToOne(mappedBy = "fk_carro")
     private Vaga vaga;
 
+    @OneToOne(mappedBy = "fk_carro")
+    private Ticket ticket;
+
     public Carro(CarroCreateDTO data) {
         this.placa = data.placa();
         this.modelo = data.modelo();

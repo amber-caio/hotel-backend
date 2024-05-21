@@ -4,7 +4,7 @@ import com.caioamber.hotel.entities.Ticket;
 
 import java.time.LocalDateTime;
 
-public record TicketDTO(Long id, LocalDateTime data_hora, double total, Boolean status) {
+public record TicketDTO(Long id, String data_hora, double total, Boolean status) {
     public TicketDTO(Ticket ticket){
         this(
             ticket.getId(),
