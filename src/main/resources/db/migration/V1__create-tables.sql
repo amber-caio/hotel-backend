@@ -47,6 +47,27 @@ CREATE TABLE ticket(
     FOREIGN KEY (fk_vaga) REFERENCES vaga(id),
 
     PRIMARY KEY(id)
+);
+
+CREATE TABLE cardapio (
+    id bigint not null auto_increment,
+    nome VARCHAR(100) not null,
+    entrada VARCHAR(100) not null,
+    prato VARCHAR(100) not null,
+    sobremesa VARCHAR(100) not null,
+    ativo TINYINT not null,
+
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE restaurante(
+    id bigint not null auto_increment,
+    turno VARCHAR(100) NOT NULL,
+    fk_cardapio bigint,
+
+    PRIMARY KEY(id),
+    FOREIGN KEY(fk_cardapio) REFERENCES cardapio(id)
+
 )
 
 

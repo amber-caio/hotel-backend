@@ -1,9 +1,10 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.dtos.cardapios.CardapioCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@Entity(name="cardapio")
 @Table(name="cardapio")
 @Getter
 @Setter
@@ -12,15 +13,24 @@ import lombok.*;
 @EqualsAndHashCode(of="id")
 public class Cardapio {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
     private String entrada;
-    private String pratoPrincipal;
+    @Column(name="prato")
+    private String prato;
     private String sobremesa;
-    private boolean ativo;
+    private Boolean ativo;
 
-    @OneToOne(mappedBy = "cardapio")
+    @OneToOne(mappedBy = "fk_cardapio")
     private Restaurante restaurante;
+
+    public Cardapio(CardapioCreateDTO data) {
+        this.nome = data.nome();
+        this.entrada = data.entrada();
+        this.prato = data.prato();
+        this.sobremesa = data.sobremesa();
+        this.ativo = true;
+    }
 }

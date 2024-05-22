@@ -18,6 +18,6 @@ public class Restaurante {
     private String turno;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_cardapio", referencedColumnName = "id")
-    private Cardapio cardapio;
+    @JoinColumn(name="fk_cardapio", referencedColumnName = "id")
+    private Cardapio fk_cardapio;
 }
