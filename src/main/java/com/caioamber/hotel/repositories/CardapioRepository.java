@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface CardapioRepository extends JpaRepository<Cardapio, Long> {
     List<Cardapio> findAllByAtivoTrue();
+
+    Cardapio findByNome(String nome);
 }

@@ -62,7 +62,8 @@ CREATE TABLE cardapio (
 
 CREATE TABLE restaurante(
     id bigint not null auto_increment,
-    turno VARCHAR(100) NOT NULL,
+    turno VA
+    RCHAR(100) NOT NULL,
     fk_cardapio bigint,
 
     PRIMARY KEY(id),

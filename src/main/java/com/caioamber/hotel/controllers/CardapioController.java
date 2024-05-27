@@ -1,5 +1,6 @@
 package com.caioamber.hotel.controllers;
 
+import com.caioamber.hotel.dtos.cardapios.CardapioStatusDTO;
 import com.caioamber.hotel.dtos.cardapios.CardapioCreateDTO;
 import com.caioamber.hotel.dtos.cardapios.CardapioDTO;
 import com.caioamber.hotel.services.CardapioService;
@@ -38,5 +39,21 @@ public class CardapioController {
             tags = {"Cardápios"})
     public ResponseEntity<List<CardapioDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("{nome}")
+    @Operation(summary = "Buscar cardápio por nome",
+            description ="Buscar cardápio por nome",
+            tags = {"Cardápios"})
+    public ResponseEntity<CardapioDTO> getByNome(@PathVariable String nome){
+        return new ResponseEntity<>(service.getByNome(nome), HttpStatus.OK);
+    }
+
+    @PutMapping("{nome}")
+    @Operation(summary = "Alterar status do cardápio",
+            description ="Alterar status do cardápio",
+            tags = {"Cardápios"})
+    public ResponseEntity<CardapioDTO> alterarStatus(@PathVariable String nome, @RequestBody @Valid CardapioStatusDTO data){
+        return new ResponseEntity<>(service.alterarStatus(nome, data.ativo()), HttpStatus.OK);
     }
 }
