@@ -40,4 +40,12 @@ public class RestauranteController {
     public ResponseEntity<List<RestauranteDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
+
+    @GetMapping("{id}")
+    @Operation(summary = "Buscar Restaurante por ID",
+            description ="Buscar Restaurante por ID",
+            tags = {"Restaurantes"})
+    public ResponseEntity<RestauranteDTO> getById(@PathVariable Long id){
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
+    }
 }

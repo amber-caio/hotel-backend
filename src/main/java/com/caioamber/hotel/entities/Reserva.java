@@ -18,13 +18,13 @@ public class Reserva {
     private Long id;
     private LocalDate data_inicio;
     private LocalDate data_fim;
-    private boolean status;
+    private Boolean status;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_quarto", referencedColumnName = "id")
-    private Quarto quarto;
+    @JoinColumn(name="fk_quarto", referencedColumnName = "id")
+    private Quarto fk_quarto;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_hospede", referencedColumnName = "id")
-    private Hospede hospede;
+    @JoinColumn(name="fk_hospede", referencedColumnName = "id")
+    private Hospede fk_hospede;
 }

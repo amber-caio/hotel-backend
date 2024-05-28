@@ -1,5 +1,6 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.dtos.quartos.QuartoCreateDTO;
 import com.caioamber.hotel.entities.enums.Tipo;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,9 +18,15 @@ public class Quarto {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
-    private boolean status;
+    private Boolean status;
     private double valor_diaria;
 
-    @OneToOne(mappedBy = "quarto")
+    @OneToOne(mappedBy = "fk_quarto")
     private Reserva reserva;
+
+    public Quarto(QuartoCreateDTO data) {
+        this.tipo = data.tipo();
+        this.status = data.status();
+        this.valor_diaria = data.valor_diaria();
+    }
 }

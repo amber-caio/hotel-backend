@@ -1,5 +1,6 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.dtos.funcionarios.FuncionarioCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,5 +22,12 @@ public class Funcionario {
     private String nome;
     private String cpf;
     private LocalDate data_admissao;
-    private boolean ativo;
+    private Boolean ativo;
+
+    public Funcionario(FuncionarioCreateDTO data) {
+        this.nome = data.nome();
+        this.cpf = data.cpf();
+        this.data_admissao = data.data_admissao();
+        this.ativo = true;
+    }
 }
