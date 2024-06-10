@@ -54,6 +54,7 @@ public class TicketController {
     @Operation(summary = "Alterar Status do Ticket",
             description = "Alterar Status do Ticket",
             tags = {"Tickets"})
+    @Transactional
     public ResponseEntity<TicketDTO> alterarStatus(@PathVariable Long id, @RequestBody TicketStatusDTO ticketStatusDTO){
         return new ResponseEntity<>(service.alterarStatus(id, ticketStatusDTO.status()), HttpStatus.OK);
     }

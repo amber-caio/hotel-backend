@@ -35,7 +35,7 @@ public class RestauranteService {
     public List<RestauranteDTO> getAll(){
         return repository.findAll().stream().map(RestauranteDTO::new).toList();
     }
-    public RestauranteDTO getById(Long id){
+    public RestauranteDTO getById   (Long id){
         return new RestauranteDTO(repository.findById(id).orElseThrow(() -> new NotFoundException("Restaurant not found!")));
     }
 }
