@@ -19,26 +19,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations {
+
     @Autowired
     private SecurityFilter filter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests(req -> {
-                    // Não precisa de login
-                    req.requestMatchers(HttpMethod.POST, "/users/login").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "/users/register").permitAll();
+            .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+            .authorizeHttpRequests(req -> {
 
-                    // Precisa de login
-                    req.requestMatchers(HttpMethod.GET, "/hospedes/**", "/hospede");
-                    req.requestMatchers(HttpMethod.POST, "/hospedes/**", "/hospede");
-                    req.requestMatchers(HttpMethod.PUT, "/hospedes/**", "/hospede");
-                    req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                    req.anyRequest().authenticated();
-                }).build();
+                req.requestMatchers(HttpMethod.GET, "/hospedes/**", "/hospede").permitAll();
+                req.requestMatchers(HttpMethod.POST, "/hospedes/**", "/hospede").permitAll();
+                req.requestMatchers(HttpMethod.PUT, "/hospedes/**", "/hospede").permitAll();
+
+                req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
+                req.requestMatchers("/usuarios","/usuarios/login", "/usuarios/register", "/usuarios/**").permitAll();
+
+                req.anyRequest().authenticated();
+            }).build();
     }
 
     @Bean
@@ -50,6 +50,4 @@ public class SecurityConfigurations {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-
 }

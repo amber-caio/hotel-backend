@@ -1,7 +1,7 @@
 package com.caioamber.hotel.entities;
 
+import com.caioamber.hotel.dtos.usuarios.UserCreateDTO;
 import com.caioamber.hotel.dtos.usuarios.UserRole;
-import com.caioamber.hotel.dtos.usuarios.UsuarioCreateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +30,7 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    public Usuario(UsuarioCreateDTO data, String senha){
+    public Usuario(UserCreateDTO data, String senha){
         this.nome = data.nome();
         this.login = data.login();
         this.senha = senha;

@@ -41,7 +41,7 @@ public class ReservaController {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @Operation(summary = "Buscar Reserva",
             description = "Buscar Reserva",
             tags = {"Reservas"})

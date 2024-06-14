@@ -2,6 +2,7 @@ package com.caioamber.hotel.configs;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +11,11 @@ public class SpringDocConfiguration {
     @Bean
     public OpenAPI customOpenApi(){
         return new OpenAPI().components(
-                new Components()
+            new Components().addSecuritySchemes("bearer-key", new SecurityScheme()
+                    .type(SecurityScheme.Type.HTTP)
+                    .scheme("bearer")
+                    .bearerFormat("JWT")
+            )
         );
     }
 }
