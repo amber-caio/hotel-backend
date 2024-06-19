@@ -1,6 +1,9 @@
-package com.caioamber.hotel.dtos.usuarios;
+package com.remedios.amber.curso.dtos.usuarios.enums;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
+import org.apache.catalina.User;
+
 @Getter
 public enum UserRole {
     ROLE_ADMIN("admin"),
