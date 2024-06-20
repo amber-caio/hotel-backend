@@ -1,4 +1,5 @@
 package com.caioamber.hotel.entities;
+import com.caioamber.hotel.dtos.usuarios.UserCreateDTO;
 import com.remedios.amber.curso.dtos.usuarios.enums.UserRole;
 
 import jakarta.persistence.*;
@@ -29,6 +30,13 @@ public class User implements UserDetails {
 
     @Enumerated
     private  UserRole role;
+
+    public User(UserCreateDTO data, String senha) {
+        this.name = data.nome();
+        this.username = data.username();
+        this.password = senha;
+        this.role = UserRole.ROLE_ADMIN;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

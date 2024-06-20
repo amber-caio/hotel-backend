@@ -8,7 +8,6 @@ CREATE TABLE hospede (
     PRIMARY KEY(id)
 );
 
-
 CREATE TABLE carro(
     id bigint not null auto_increment,
     placa VARCHAR(100) not null,
@@ -102,11 +101,11 @@ CREATE TABLE reserva(
     FOREIGN KEY(fk_hospede) REFERENCES hospede(id)
 );
 
-CREATE TABLE usuario (
+CREATE TABLE user(
     id bigint not null auto_increment,
-    login varchar(100) not null,
-    senha varchar(100) not null,
-    nome varchar(100) not null,
+    username varchar(100) not null,
+    password varchar(100) not null,
+    name varchar(100) not null,
     role varchar(20) not null,
 
 
