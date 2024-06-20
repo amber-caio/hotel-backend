@@ -30,14 +30,13 @@ public class AuthenticationService {
     private UserService userService;
 
     public TokenJWTDTO loginAndCreateToken(AuthenticationDTO data){
-//        UsernamePasswordAuthenticationToken userTest = new UsernamePasswordAuthenticationToken(data.username(), data.senha());
-//        System.out.println("User: " + userTest.getPrincipal());
+        UsernamePasswordAuthenticationToken userTest = new UsernamePasswordAuthenticationToken(data.nomeUsuario(), data.senha());
+        System.out.println("User: " + userTest.getPrincipal());
         try{
-            Authentication user = manager.authenticate(new UsernamePasswordAuthenticationToken(data.username(), data.senha()));
+            Authentication user = manager.authenticate(new UsernamePasswordAuthenticationToken(data.nomeUsuario(), data.senha()));
             String tokenJWT = tokenService.gerarToken((User) user.getPrincipal());
             return new TokenJWTDTO(tokenJWT);
         } catch (AuthenticationException e){
-            System.out.println("ENTREI CATCH");
             System.out.println("Service: Exception during client authentication: " + e.getMessage());
             throw new BadCredentialsException(e.getMessage());
         }

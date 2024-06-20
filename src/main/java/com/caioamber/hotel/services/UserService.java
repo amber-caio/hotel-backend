@@ -31,13 +31,13 @@ public class UserService {
         this.repository.save(user);
     }
 
-    public Object getByUsername(String username){
-        Optional<User> user = repository.findByUsername(username);
+    public Object getByUsername(String nomeUsuario){
+        Optional<User> user = repository.findByNomeUsuario(nomeUsuario);
 
         if(user.isPresent()){
             return  user.get();
         }
-        throw new UsernameNotFoundException("User not found " + username);
+        throw new UsernameNotFoundException("User not found " + nomeUsuario);
     }
 
 }

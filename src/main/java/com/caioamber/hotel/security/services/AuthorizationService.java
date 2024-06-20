@@ -24,6 +24,9 @@ public class AuthorizationService {
 
         userService.saveUser(user);
 
+        System.out.println("Nome: " + user.getName());
+        System.out.println("Username: " + user.getNomeUsuario());
+
         return new UserDTO(user);
     }
 }

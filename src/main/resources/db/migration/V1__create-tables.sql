@@ -103,7 +103,7 @@ CREATE TABLE reserva(
 
 CREATE TABLE user(
     id bigint not null auto_increment,
-    username varchar(100) not null,
+    nome_usuario varchar(100) not null,
     password varchar(100) not null,
     name varchar(100) not null,
     role varchar(20) not null,

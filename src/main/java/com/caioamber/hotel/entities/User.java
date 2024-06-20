@@ -25,19 +25,13 @@ public class User implements UserDetails {
     private Long id;
 
     private String name;
-    private String username;
+
+    @Column(name="nome_usuario")
+    private String nomeUsuario;
     private String password;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private  UserRole role;
-
-    public User(UserCreateDTO data, String senha) {
-        this.name = data.nome();
-        this.username = data.username();
-        this.password = senha;
-        this.role = UserRole.ROLE_ADMIN;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -45,31 +39,37 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return nomeUsuario;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+    public User(UserCreateDTO data, String senha) {
+        this.name = data.nome();
+        this.nomeUsuario = data.nomeUsuario();
+        this.password = senha;
+        this.role = UserRole.ROLE_ADMIN;
     }
 }
