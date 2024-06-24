@@ -11,6 +11,10 @@ public record HospedeCreateDTO(
         String cpf,
         @Positive
         @NotNull
-        int idade
+        int idade,
+        @NotBlank
+        String nomeUsuario,
+        @NotBlank
+        String senha
 ) {
 }

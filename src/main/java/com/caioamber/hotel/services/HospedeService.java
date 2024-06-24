@@ -33,9 +33,8 @@ public class HospedeService {
      */
 
     public HospedeDTO cadastro(HospedeCreateDTO data) {
-        if (this.repository.findByCpf(data.cpf()) != null){
-
-            Hospede hospede = this.repository.findByCpf(data.cpf());
+        Hospede hospede = repository.findByCpf(data.cpf());
+        if (this.repository.findByCpf(hospede.getCpf()) != null){
 
             if (hospede.getAtivo()){
                 throw new IllegalArgumentException("This CFP is already being used");
@@ -43,7 +42,7 @@ public class HospedeService {
             hospede.setAtivo(true);
             return new HospedeDTO(hospede);
         }
-        return new HospedeDTO(repository.save(new Hospede(data)));
+        return new HospedeDTO(repository.save(hospede));
     }
 
     // Get All 'Hospedes' Ativos
@@ -59,6 +58,10 @@ public class HospedeService {
             return new HospedeDTO(repository.findByCpf(cpf));
         }
         throw new NotFoundException("Visitant not found!");
+    }
+
+    public Hospede getByUsername(String username){
+        return repository.findByNomeUsuario(username).orElseThrow(() -> new NotFoundException("User not found!"));
     }
 
     /*

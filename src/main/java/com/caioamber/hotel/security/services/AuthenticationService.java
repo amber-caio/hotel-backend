@@ -1,9 +1,8 @@
 package com.caioamber.hotel.security.services;
 
-import com.caioamber.hotel.entities.User;
+import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.security.dtos.AuthenticationDTO;
 import com.caioamber.hotel.security.dtos.TokenJWTDTO;
-import com.caioamber.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,8 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 
 @Service
 public class AuthenticationService {
@@ -23,18 +20,12 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager manager;
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private UserService userService;
-
     public TokenJWTDTO loginAndCreateToken(AuthenticationDTO data){
         UsernamePasswordAuthenticationToken userTest = new UsernamePasswordAuthenticationToken(data.nomeUsuario(), data.senha());
         System.out.println("User: " + userTest.getPrincipal());
         try{
-            Authentication user = manager.authenticate(new UsernamePasswordAuthenticationToken(data.nomeUsuario(), data.senha()));
-            String tokenJWT = tokenService.gerarToken((User) user.getPrincipal());
+            Authentication hospede = manager.authenticate(new UsernamePasswordAuthenticationToken(data.nomeUsuario(), data.senha()));
+            String tokenJWT = tokenService.gerarToken((Hospede) hospede.getPrincipal());
             return new TokenJWTDTO(tokenJWT);
         } catch (AuthenticationException e){
             System.out.println("Service: Exception during client authentication: " + e.getMessage());

@@ -57,4 +57,13 @@ public class ReservaController {
     public ResponseEntity<ReservaDTO> alterarStatus(@PathVariable Long id, @RequestBody ReservaStatusDTO data){
         return new ResponseEntity<>(service.alterarStatus(id, data.status()), HttpStatus.OK);
     }
+
+//    @GetMapping("/listar/usuario")
+//    @Operation(summary = "Listar Reservas por Username",
+//            description = "Listar Reservas por Username",
+//            tags = {"Reservas"})
+//    public ResponseEntity<ReservaDTO> getAllByUsername(){
+//        return new ResponseEntity<>(service.getAllByUsername(), HttpStatus.OK);
+//    }
+
 }

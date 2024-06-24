@@ -1,7 +1,7 @@
 package com.caioamber.hotel.security;
 
 import com.caioamber.hotel.security.services.TokenService;
-import com.caioamber.hotel.services.UserService;
+import com.caioamber.hotel.services.HospedeService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,12 +22,12 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private UserService userService;
+    private HospedeService hospedeService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException{
         if(getToken(request) != null){
-            UserDetails user = (UserDetails) userService.getByUsername(tokenService.getSubject(getToken(request)));
+            UserDetails user = (UserDetails) hospedeService.getByUsername(tokenService.getSubject(getToken(request)));
 
             SecurityContextHolder
                     .getContext()

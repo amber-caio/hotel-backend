@@ -7,7 +7,9 @@ public record HospedeDTO(
         String nome,
         String cpf,
         int idade,
-        Boolean ativo
+        Boolean ativo,
+        String nomeUsuario,
+        String senha
 ) {
 
     public HospedeDTO(Hospede hospede) {
@@ -15,7 +17,9 @@ public record HospedeDTO(
                 hospede.getNome(),
                 hospede.getCpf(),
                 hospede.getIdade(),
-                hospede.getAtivo()
+                hospede.getAtivo(),
+                hospede.getNomeUsuario(),
+                hospede.getSenha()
         );
     }
 }

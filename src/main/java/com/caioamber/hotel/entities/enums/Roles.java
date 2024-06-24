@@ -8,7 +8,8 @@ public enum Roles {
     ROLE_GERENTE("gerente"),
     ROLE_FUNCIONARIO_ESTAC("funcionarioEstacionamento"),
     ROLE_FUNCIONARIO_REST("funcionarioRestaurante"),
-    ROLE_FUNCIONARIO_CAIXA("funcionarioCaixa");
+    ROLE_FUNCIONARIO_CAIXA("funcionarioCaixa"),
+    ROLE_HOSPEDE("hospede");
 
     private String role;
 

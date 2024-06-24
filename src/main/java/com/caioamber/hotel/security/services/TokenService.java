@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.caioamber.hotel.entities.User;
+import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.exceptions.TokenException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -24,13 +24,13 @@ public class TokenService {
     // Criando o logger
     private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
-    public String gerarToken(User user) throws JWTCreationException{
+    public String gerarToken(Hospede hospede) throws JWTCreationException{
         try {
             return JWT
                     .create()
                     .withIssuer("hotel")
-                    .withSubject(user.getUsername())
-                    .withClaim("id", user.getId())
+                    .withSubject(hospede.getUsername())
+                    .withClaim("id", hospede.getId())
                     .withExpiresAt(Expirar())
                     .sign(Algorithm.HMAC256(secret));
         } catch (JWTCreationException e){

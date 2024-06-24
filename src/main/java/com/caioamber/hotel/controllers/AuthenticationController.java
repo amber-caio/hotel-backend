@@ -1,7 +1,7 @@
 package com.caioamber.hotel.controllers;
 
-import com.caioamber.hotel.dtos.usuarios.UserCreateDTO;
-import com.caioamber.hotel.dtos.usuarios.UserDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
 import com.caioamber.hotel.security.dtos.AuthenticationDTO;
 import com.caioamber.hotel.security.dtos.TokenJWTDTO;
 import com.caioamber.hotel.security.services.AuthenticationService;
@@ -38,7 +38,7 @@ public class AuthenticationController {
     @Operation(summary = "Register a client!",
             description ="Register a client!",
             tags = {"Auth"})
-    public ResponseEntity<UserDTO> register(@RequestBody @Valid UserCreateDTO dados){
-        return new ResponseEntity<>(authorizationService.register(dados), HttpStatus.OK);
+    public ResponseEntity<HospedeDTO> register(@RequestBody @Valid HospedeCreateDTO data){
+        return new ResponseEntity<>(authorizationService.register(data), HttpStatus.OK);
     }
 }

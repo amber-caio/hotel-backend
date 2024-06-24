@@ -2,12 +2,16 @@ package com.caioamber.hotel.services;
 
 import com.caioamber.hotel.dtos.reservas.ReservaCreateDTO;
 import com.caioamber.hotel.dtos.reservas.ReservaDTO;
+import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.entities.Reserva;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import com.caioamber.hotel.repositories.HospedeRepository;
 import com.caioamber.hotel.repositories.QuartoRepository;
 import com.caioamber.hotel.repositories.ReservaRepository;
+import com.caioamber.hotel.security.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,9 @@ public class ReservaService {
 
     @Autowired
     private HospedeRepository hospedeRepository;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     public ReservaDTO cadastrar(ReservaCreateDTO data){
         quartoRepository.findById(data.id_quarto()).orElseThrow(() -> new NotFoundException("Room not found!"));
@@ -53,4 +60,11 @@ public class ReservaService {
         repository.save(reserva);
         return new ReservaDTO(reserva);
     }
+
+//    public ReservaDTO getAllByUsername(){
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String username = userDetails.getUsername();
+//
+//        return new ReservaDTO(repository.findByFk_Hospede((Hospede) userDetails));
+//    }
 }

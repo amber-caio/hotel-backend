@@ -1,32 +1,29 @@
 package com.caioamber.hotel.security.services;
 
-import com.caioamber.hotel.dtos.usuarios.UserCreateDTO;
-import com.caioamber.hotel.dtos.usuarios.UserDTO;
-import com.caioamber.hotel.entities.User;
-import com.caioamber.hotel.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.caioamber.hotel.dtos.hospedes.HospedeCreateDTO;
+import com.caioamber.hotel.dtos.hospedes.HospedeDTO;
+import com.caioamber.hotel.entities.Hospede;
+import com.caioamber.hotel.services.HospedeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationService {
     @Autowired
-    private UserService userService;
+    private HospedeService hospedeService;
 
     @Autowired
     private AuthenticationService authenticationService;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
-    public UserDTO register(UserCreateDTO data){
-        User user = new User(data, passwordEncoder.encode(data.senha()));
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        userService.saveUser(user);
+    public HospedeDTO register(HospedeCreateDTO data){
+        Hospede hospede = new Hospede(data, passwordEncoder.encode(data.senha()));
 
-        System.out.println("Nome: " + user.getName());
-        System.out.println("Username: " + user.getNomeUsuario());
+        hospedeService.cadastro(new HospedeCreateDTO(data.nome(), data.cpf(), data.idade(), data.nomeUsuario(), data.senha()));
 
-        return new UserDTO(user);
+        return new HospedeDTO(hospede);
     }
 }
