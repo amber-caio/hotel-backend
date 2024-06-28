@@ -1,9 +1,12 @@
 CREATE TABLE hospede (
     id bigint not null auto_increment,
     nome VARCHAR(100) not null,
+    nome_usuario VARCHAR(50) not null,
+    senha VARCHAR(250) not null,
     cpf VARCHAR(15) not null,
     idade INTEGER not null,
     ativo TINYINT not null,
+    role VARCHAR(50) not null,
 
     PRIMARY KEY(id)
 );
@@ -100,15 +103,3 @@ CREATE TABLE reserva(
     FOREIGN KEY(fk_quarto) REFERENCES quarto(id),
     FOREIGN KEY(fk_hospede) REFERENCES hospede(id)
 );
-
-CREATE TABLE user(
-    id bigint not null auto_increment,
-    nome_usuario varchar(100) not null,
-    password varchar(100) not null,
-    name varchar(100) not null,
-    role varchar(20) not null,
-
-
-    primary key(id)
-);
-

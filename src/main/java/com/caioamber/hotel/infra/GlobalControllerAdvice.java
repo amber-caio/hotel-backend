@@ -1,6 +1,7 @@
 package com.caioamber.hotel.infra;
 
 import com.caioamber.hotel.dtos.ExceptionDTO;
+import com.caioamber.hotel.exceptions.GenericsInactiveGuest;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,14 @@ public class GlobalControllerAdvice {
         body.put("message", e.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(GenericsInactiveGuest.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ResponseEntity<?> handleGenericsInactiveGuest (Exception e){
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", e.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 }

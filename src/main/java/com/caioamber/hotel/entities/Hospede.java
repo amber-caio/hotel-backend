@@ -49,6 +49,7 @@ public class Hospede implements UserDetails {
         this.idade = data.idade();
         this.ativo = true;
         this.senha = senhaEncrypt;
+        this.nomeUsuario = data.nomeUsuario();
         this.role = Roles.ROLE_HOSPEDE;
     }
 
