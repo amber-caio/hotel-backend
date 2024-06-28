@@ -2,7 +2,6 @@ package com.caioamber.hotel.services;
 
 import com.caioamber.hotel.dtos.reservas.ReservaCreateDTO;
 import com.caioamber.hotel.dtos.reservas.ReservaDTO;
-import com.caioamber.hotel.entities.Hospede;
 import com.caioamber.hotel.entities.Reserva;
 import com.caioamber.hotel.exceptions.NotFoundException;
 import com.caioamber.hotel.repositories.HospedeRepository;
@@ -10,8 +9,6 @@ import com.caioamber.hotel.repositories.QuartoRepository;
 import com.caioamber.hotel.repositories.ReservaRepository;
 import com.caioamber.hotel.security.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

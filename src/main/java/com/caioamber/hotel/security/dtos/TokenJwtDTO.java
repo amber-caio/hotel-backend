@@ -1,4 +1,4 @@
 package com.caioamber.hotel.security.dtos;
 
-public record TokenJWTDTO(String token) {
+public record TokenJwtDTO(String token) {
 }

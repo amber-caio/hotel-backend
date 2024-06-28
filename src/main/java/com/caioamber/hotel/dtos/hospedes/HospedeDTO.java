@@ -8,18 +8,15 @@ public record HospedeDTO(
         String cpf,
         int idade,
         Boolean ativo,
-        String nomeUsuario,
-        String senha
+        String nomeUsuario
 ) {
-
-    public HospedeDTO(Hospede hospede) {
+    public HospedeDTO(Hospede hospede){
         this(hospede.getId(),
                 hospede.getNome(),
                 hospede.getCpf(),
                 hospede.getIdade(),
                 hospede.getAtivo(),
-                hospede.getNomeUsuario(),
-                hospede.getSenha()
+                hospede.getNomeUsuario()
         );
     }
 }
